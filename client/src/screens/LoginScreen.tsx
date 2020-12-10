@@ -43,7 +43,7 @@ export const LoginScreen: React.FC = () => {
   const onSubmit: SubmitHandler<LoginInputs> = (data) => {
     try {
       LoginUser(data);
-      history.push("/");
+      history.push("/main");
     } catch (error) {
       console.log(error);
     }

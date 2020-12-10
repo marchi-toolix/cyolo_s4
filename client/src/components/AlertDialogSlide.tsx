@@ -2,19 +2,14 @@ import React, { useEffect,useState } from "react";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
-import TextField from "@material-ui/core/TextField";
-import DialogContentText from "@material-ui/core/DialogContentText";
+
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Slide from "@material-ui/core/Slide";
 import { TransitionProps } from "@material-ui/core/transitions";
 import Share from "@material-ui/icons/Share";
 import { useRootStore } from "../core/RootStateContext";
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
-import InputBase from '@material-ui/core/InputBase';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 
@@ -53,21 +48,13 @@ export default function AlertDialogSlide() {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">{"Share With"}</DialogTitle>
-        <Select
-          labelId="demo-customized-select-label"
-          id="demo-customized-select"
-          value={filesStore.users}
-          onChange={()=>{}}
-          input={<input />}
-        >
-          {filesStore.users.map(user => (
-          <MenuItem id={file.id} key={file.id} name={file.name} size={file.size} />
-        ))}
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {}
-        </Select>
+        <Autocomplete
+      id="combo-box-demo"
+      options={filesStore.users}
+      getOptionLabel={(option) => option.name}
+      style={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+    />
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Share

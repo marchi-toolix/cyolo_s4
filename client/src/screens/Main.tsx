@@ -7,10 +7,10 @@ import Box from "@material-ui/core/Box";
 import { useDropzone } from "react-dropzone";
 import logo from "../logo.png";
 import { UploadFile } from "../core/api";
-
 import { observer } from "mobx-react";
 import { useRootStore } from "../core/RootStateContext";
 import FileCard from '../components/FileCard';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,15 +41,14 @@ const useStyles = makeStyles((theme) => ({
 const Main: React.FC = () => {
   const {filesStore} = useRootStore();
   const classes = useStyles();
+  const history = useHistory()
   const onDrop = useCallback(async (acceptedFiles) => {
     let formData = new FormData();
     formData.append("file", acceptedFiles[0]);
-    const res = UploadFile(formData);
-    if (res) {
-      alert("Perfect! ");
-    } else {
-      alert("Oops! ");
-    }
+    UploadFile(formData);  
+    window.location.reload();
+
+
   }, []);
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
